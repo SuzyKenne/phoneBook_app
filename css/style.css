@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.menu {
+    background-color: #777777;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .create-contact button {
+    background-color: #777777;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.sidebar  ul,
+.sidebar .view-manage ul,
+.sidebar .category ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.sidebar  a,
+.sidebar .view-manage a,
+.sidebar .category a {
+    text-decoration: none;
+    padding: 10px 5px;
+    margin: 5% 0;
+    cursor: pointer;
+    color: #333;
+}
+
+.sidebar  li.active {
+    font-weight: bold;
+}
+.sidebar li i {
+    margin-right: 10px;
+    color: #555;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+header input[type="search"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+.contacts-list table {
+    overflow: hidden;
+    table-layout: fixed;
+    border-collapse: collapse;
+    /* box-shadow: 0px 10px 10px #ccc; */
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
+    max-width: 1920px;
+    width: 100%;
+    margin: auto;
+}
+
+.contacts-list th,
+.contacts-list td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.contacts-list th {
+    width: calc(100%/6);
+    background-color: white;
+    text-align: left;
+    padding:  0.9rem;
+}
+
+.contacts-list td {
+    color: #555;
+    border-top: 0.5px solid #ddd;
+    overflow: hidden;
+
+}
+
+.formContainer {
+    position: relative;
+    margin: 8% auto;
+    min-height: 60%;
+    width: 50%;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    background: white;
+    padding: 0px 0px 5px 15px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+h2 {
+    text-align: center;
+
+}
+.formContentContainer {
+    margin-top: 15%;
+}
+.formInput input select{
+    display: block;
+    margin: 0px 0px 15px 20px;
+    padding: 4px;
+    width: 80%;
+    height: 5%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-size: 20px;
+    font-family: bold;
+}
+
+.submitButton {
+    background: #777777;;
+    color: #fff;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    width: 80%;
+    height: 5%;
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+}
