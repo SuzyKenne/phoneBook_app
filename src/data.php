@@ -3,7 +3,7 @@ require_once "contact.php";
 require_once "contactManager.php";
 
 $contacts = [
-    new contact(1, "Kenne Suzy", "+237 650 398 429","suzyndatewo@gmail.com", "Family", "assets/images/image1.jpeg"),
+    new Contact(1, "Kenne Suzy", "+237 650 398 429","suzyndatewo@gmail.com", "Family", "assets/images/image1.jpeg"),
     new contact(2, "Monie Julius", "+237 657 345 123","moniejulius@gmail.com" ,"Friend", "assets/images/image2.jpeg"),
     new contact(3, "Kenne Suzy", "+237 650 398 429","suzyndatewo@gmail.com", "Family", "assets/images/image1.jpeg"),
     new contact(4, "Yan Ivan", "+237 657 345 123","yanivan@gmail.com" ,"Friend", "assets/images/image2.jpeg"),

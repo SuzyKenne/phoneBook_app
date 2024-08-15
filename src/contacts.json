@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "Kenne Suzy",
+        "phoneNumber": "+237 650 398 429",
+        "email": "suzyndatewo@gmail.com",
+        "category": "Family",
+        "image": "assets\/images\/image1.jpeg"
+    },
+    {
+        "id": 2,
+        "name": "Monie Julius",
+        "phoneNumber": "+237 657 345 123",
+        "email": "moniejulius@gmail.com",
+        "category": "Friend",
+        "image": "assets\/images\/image2.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "Kenne Suzy",
+        "phoneNumber": "+237 650 398 429",
+        "email": "suzyndatewo@gmail.com",
+        "category": "Family",
+        "image": "assets\/images\/image1.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Yan Ivan",
+        "phoneNumber": "+237 657 345 123",
+        "email": "yanivan@gmail.com",
+        "category": "Friend",
+        "image": "assets\/images\/image2.jpeg"
+    },
+    {
+        "id": 5,
+        "name": "Yan Ivan",
+        "phoneNumber": "+237 657 345 123",
+        "email": "yanivan@gmail.com",
+        "category": "Friend",
+        "image": "assets\/images\/image2.jpeg"
+    },
+    {
+        "id": 6,
+        "name": "mari Jane",
+        "phoneNumber": "+234 678 345 123",
+        "email": "marie@gmail.com",
+        "category": "client",
+        "image": "assets\/images\/avatar.jpg"
+    },
+    {
+        "id": 7,
+        "name": "ange wendy",
+        "phoneNumber": "+233 890 123 234",
+        "email": "angewendy@gmail.com",
+        "category": "boss",
+        "image": "assets\/images\/boss_avatar.jpeg"
+    },
+    {
+        "id": 8,
+        "name": "georoni pavel",
+        "phoneNumber": "+237 789 456 234",
+        "email": "georonipavell@gmial.com",
+        "category": "friend",
+        "image": "assets\/images"
+    },
+    {
+        "id": 9,
+        "name": "mari Jane",
+        "phoneNumber": "+233 890 123 234",
+        "email": "georonipavell@gmial.com",
+        "category": "boss",
+        "image": "assets\/images"
+    },
+    {
+        "id": 10,
+        "name": "georoni pavel",
+        "phoneNumber": "+234 678 345 123",
+        "email": "georonipavell@gmial.com",
+        "category": "boss",
+        "image": "assets\/images\/"
+    },
+    {
+        "id": 11,
+        "name": "oeoei",
+        "phoneNumber": "3748747464",
+        "email": "jruuuryryr",
+        "category": "family",
+        "image": "assets\/images\/"
+    },
+    {
+        "id": 12,
+        "name": "georoni pavel",
+        "phoneNumber": "+234 678 345 123",
+        "email": "georonipavell@gmial.com",
+        "category": "family",
+        "image": "assets\/images\/"
+    }
+]

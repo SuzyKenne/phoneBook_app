@@ -1,50 +1,65 @@
 <?php
-class contactManager {
-    private $contacts = [];
+class ContactManager {
+    private $contacts;
 
-    public function __construct($contacts = [])
-    {
+    public function __construct($contacts = []) {
         $this->contacts = $contacts;
     }
 
+    // Method to add a new contact
+    public function addContact(Contact $contact) {
+        $this->contacts[] = $contact;
+        $this->saveContacts();
+    }
 
-    // get all contacts by id
-    public function getAllContacts(){
+    // Method to update a contact by ID
+    public function updateContact($id, $name, $phoneNumber, $email, $category, $image) {
+        foreach ($this->contacts as $contact) {
+            if ($contact->getId() == $id) {
+                $contact->setName($name);
+                $contact->setPhoneNumber($phoneNumber);
+                $contact->setEmail($email);
+                $contact->setCategory($category);
+                $contact->setImage($image);
+                $this->saveContacts();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Method to delete a contact by ID
+    public function deleteContact($id) {
+        foreach ($this->contacts as $index => $contact) {
+            if ($contact->getId() == $id) {
+                unset($this->contacts[$index]);
+                $this->contacts = array_values($this->contacts); // Reindex array
+                $this->saveContacts();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Method to get all contacts
+    public function getAllContacts() {
         return $this->contacts;
     }
 
-    public function getContactById ($id){
-        foreach($this->contacts as $contact){
-            if($contact->id == $id){
-                return$contact;
-            }
+    // Method to save contacts to a JSON file
+    private function saveContacts() {
+        $contactsArray = [];
+        foreach ($this->contacts as $contact) {
+            $contactsArray[] = [
+                'id' => $contact->getId(),
+                'name' => $contact->getName(),
+                'phoneNumber' => $contact->getPhoneNumber(),
+                'email' => $contact->getEmail(),
+                'category' => $contact->getCategory(),
+                'image' => $contact->getImage(),
+            ];
         }
-        return null;
-    }
-
-    public function addContact($contact){
-        $this->contacts[] = $contact;
-    }
-
-    public function editContact($id, $updatedContact){
-        foreach($this->contacts as &$contact){
-            if($contact->$id == $id){
-                $contact = $updatedContact;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function deleteContact($id){
-        foreach($this->contacts as $key => $contact){
-            if($contact->id == $id) {
-                unset($this->contacts[$key]);
-                return true;
-            }
-        }
-        return false;
+        file_put_contents(__DIR__ . '/src/contacts.json', json_encode($contactsArray, JSON_PRETTY_PRINT));
     }
 }
 ?>

@@ -1,7 +1,33 @@
 <?php
-require_once "../phoneBook/src/data.php";
-$contacts = $contactManager->getAllContacts();
+require_once "../phoneBook/src/contact.php";
+require_once "../phoneBook/src/contactManager.php";
+
+// Read the contacts.json file
+$jsonData = file_get_contents(__DIR__ . '/src/contacts.json');
+
+// Decode the JSON data into a PHP array
+$contactsArray = json_decode($jsonData, true);
+
+// Check if decoding was successful
+if ($contactsArray === null) {
+    die("Error decoding JSON: " . json_last_error_msg());
+}
+
+// Convert the array back into Contact objects
+$contacts = [];
+foreach ($contactsArray as $contactData) {
+    $contacts[] = new contact(
+        $contactData['id'],
+        $contactData['name'],
+        $contactData['phoneNumber'],
+        $contactData['email'],
+        $contactData['category'],
+        $contactData['image']
+    );
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +35,12 @@ $contacts = $contactManager->getAllContacts();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <title>PhoneBook</title>
 </head>
 <body>
     <!-- side-bar -->
      <div class="container">
         <aside class="sidebar">
-            <!-- <div class="create-contact">
-                <button>Contacts</button>
-            </div> -->
             <nav class="menu">
                 <ul>
                   <li class="active">Contacts</li> 
@@ -46,43 +68,53 @@ $contacts = $contactManager->getAllContacts();
         <!-- main section -->
         <main class="main-content">
             <header>
-                <input type="search" placeholder="Search">
+                <h1>PhoneBook App</h1>
             </header>
             <section class="contacts-list">
                 <table>
                     <thead>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>category</th>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Category</th>
+                            <th>Options</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($contacts as $contact):?>
+                        <?php foreach ($contacts as $contact): ?>
                             <tr>
                                 <td>
-                                    
-                                        <img src="<?= $contact->image ?>" alt="<?= $contact->name ?>" width="20" height="15">
-                                        <?= $contact->name ?>
-                                    
+                                    <img src="<?= htmlspecialchars($contact->getImage()) ?>" alt=" " width="20" height="20">
+                                    <?= htmlspecialchars($contact->getName()) ?>
                                 </td>
                                 <td>
-                                    <?= $contact->email ?>
+                                    <?= htmlspecialchars($contact->getEmail()) ?>
                                 </td>
                                 <td>
-                                    <?= $contact->category ?>
+                                    <?= htmlspecialchars($contact->getPhoneNumber()) ?>
                                 </td>
                                 <td>
-                                    <?= $contact->phoneNumber ?>
+                                    <?= htmlspecialchars($contact->getCategory()) ?>
+                                </td>
+                                <td>
+                                    <span class="options options-edit">
+                                        <a href="edit.php?id=<?= htmlspecialchars($contact->getId()) ?>" onclick="return confirm('Are you sure you want to edit this contact?');">
+                                            Edit
+                                        </a>
+                                    </span>
+                                    <span class="options options-delete">
+                                        <a href="delete.php?id=<?= htmlspecialchars($contact->getId()) ?>" onclick="return confirm('Are you sure you want to delete this contact?');">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </span>
                                 </td>
                             </tr>
-                        <?php endforeach?> 
+                        <?php endforeach; ?> 
                     </tbody>
                 </table>
             </section>
         </main>
      </div>
-
-    
-
 </body>
 </html>

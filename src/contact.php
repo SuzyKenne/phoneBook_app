@@ -1,11 +1,11 @@
 <?php
-class contact{
-    public $id;
-    public $name;
-    public $phoneNumber;
-    public $email;
-    public $category;
-    public $image;
+class Contact{
+    private $id;
+    private $name;
+    private $phoneNumber;
+    private $email;
+    private $category;
+    private $image;
 
     public function __construct($id, $name,$category, $email, $phoneNumber, $image)
     {
@@ -16,17 +16,47 @@ class contact{
         $this->category = $category;
         $this->image = $image;
     }
-
-
-    public function getContactDetails(){
-        return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "phoneNumber" => $this->phoneNumber,
-            "email" => $this->email,
-            "image" => $this->image
-
-        ];
+    //getters
+    public function getId(){
+        return $this->id;
     }
+
+    public function getName(){
+        return $this->name;
+    }
+
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function getPhoneNumber(){
+        return $this->phoneNumber;
+    }
+
+    public function getCategory(){
+        return $this->category;
+    }
+
+    public function getImage(){
+        return $this->image;
+    }
+
+    //setters
+    public function setImage(){
+        return $this->image;
+    }
+
+    public function setName(){
+        return $this->name;
+    }
+
+    public function setEmail(){
+        return $this->email;
+    }
+
+    public function setCategory(){
+        return $this->category;
+    }
+    
 }
 ?>
