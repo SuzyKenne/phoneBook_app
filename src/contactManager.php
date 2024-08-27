@@ -88,49 +88,50 @@ class ContactManager {
 
 
    
-    public function editContact($id, $contact) {
+    public function editContact($contact) {
+
+        echo 'about to update';
         // Create a new database connection
         $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-    
+
         // Check for connection errors
         if ($conn->connect_error) {
             error_log("Connection failed: " . $conn->connect_error);
             return false;
         }
-    
+
+        
         // Prepare the SQL statement
         $sql = "UPDATE contacts SET image = ?, name = ?, email = ?, phoneNumber = ?, category = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-    
-        if ($stmt === false) {
-            error_log("Prepare failed: " . $conn->error);
-            $conn->close();
-            return false;
-        }
-    
+
         // Get contact details
         $image = $contact->getImage();
         $name = $contact->getName();
         $email = $contact->getEmail();
         $phoneNumber = $contact->getPhoneNumber();
         $category = $contact->getCategory();
-    
-        // Bind parameters
+        $id = $contact->getId();
+ 
         $stmt->bind_param("sssssi", $image, $name, $email, $phoneNumber, $category, $id);
-    
+
         // Execute the statement
         if ($stmt->execute()) {
+            echo 'record updated';
             $stmt->close();
             $conn->close();
             return true;
         } else {
             error_log("Execute failed: " . $stmt->error);
             $stmt->close();
+            echo 'record not updated';
             $conn->close();
             return false;
         }
+
+        
     }
-    
+
 
     public function deleteContact($id) {
         // Ensure that the connection is using the one passed through the constructor

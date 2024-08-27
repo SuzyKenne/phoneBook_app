@@ -51,8 +51,8 @@ class Contact{
     public function setId($id){
         $this->id = $id;
     }
-    public function setImage($img){
-        $this->image =$img;
+    public function setImage($image){
+        $this->image =$image;
     }
 
     public function setName($name){

@@ -2,66 +2,86 @@
 
 require './src/contactManager.php';
 
-
 $contactManager = new ContactManager($model);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        // Handle GET request
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $contacts = $contactManager->getAllContacts();
-            $contact = new Contact(null, $image, $name, $email, $phoneNumber, $category);
+// var_dump($updatedContact);
+// var_dump($contactManager); // Check if ContactManager is initialized correctly
+// var_dump($contact); // Check if contact is retrieved correctly
 
-            foreach ($contacts as $c) {
-                if ($c->getId() == $id) {
-                    $contact = $c;
-                    break;
-                }
-            }
 
-            if ($contact === null) {
-                echo "Contact not found.";
-                exit();
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $contacts = $contactManager->getAllContacts();
+        $contact = null;
+
+        foreach ($contacts as $c) {
+            if ($c->getId() == $id) {
+                $contact = $c;
+                break;
             }
-        } else {
-            echo "No ID provided.";
+        }
+
+        if ($contact === null) {
+            echo "Contact not found.";
             exit();
         }
-    } 
-        // Handle POST request
-    if (isset($_POST['submit'])) {
-        $id = $_POST['id']; // Make sure the form includes the ID as a hidden input field
-        $name = $_POST['name'];
-        $phoneNumber = $_POST['phoneNumber'];
-        $email = $_POST['email'];
-        $category = $_POST['category'];
-        $image = $contact->getImage(); // Use the existing image by default
-
-        // Handle image upload
-        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-            $target_dir = "assets/images/";
-            $target_file = $target_dir . basename($_FILES["image"]["name"]);
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                $image = $target_file; // Update the image path
-            } else {
-                echo "Failed to upload image.";
-                exit();
-            }
-        }
-
-        // Create an updated contact object
-        $updatedContact = new Contact($id, $image, $name, $email, $phoneNumber, $category);
-        var_dump($updatedContact);
-        if ($contactManager->editContact($id, $updatedContact)) {
-            // Redirect to the index page after successful update
-            header("Location: index.php");
-            exit();
-        } else {
-            echo "Failed to update contact.";
-        }
-
-        
+    } else {
+        echo "No ID provided.";
+        exit();
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+
+    echo 'this codde runs';
+
+
+    $id = $_POST['id']; 
+    $name = $_POST['name'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $email = $_POST['email'];
+    echo $email;
+    $category = $_POST['category'];
+     // Initialize $image as an empty string
+     $image = '';
+
+     // Check if an image was uploaded and if there were no errors
+     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+         // Get the file name and temporary path
+         $file_name = basename($_FILES['image']['name']); // Sanitize file name
+         $tempname = $_FILES['image']['tmp_name'];
+ 
+         // Define the target directory where the file should be moved
+         $folder = 'assets/images/' . $file_name;
+ 
+         
+ 
+         // Attempt to move the uploaded file to the target directory
+         if (move_uploaded_file($tempname, $folder)) {
+             $image = $folder; // Assign the file path to $image
+             echo "Image uploaded successfully: $image";
+         } else {
+             echo "Failed to move uploaded file.";
+         }
+     } 
+    echo 'contace object instantiated';
+
+    $updatedContact = new Contact($id, $image, $name, $email, $phoneNumber, $category);
+    
+
+    if ($contactManager->editContact($updatedContact)) {
+    
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Failed to update contact.";
+    }
+}
+
+
     
 
 ?>
@@ -82,11 +102,13 @@ $contactManager = new ContactManager($model);
             <h2>Edit Contact</h2>
             
             <form action="editContact.php?id=<?= $contact->getId() ?>" method="post" enctype="multipart/form-data" class="formInput">
+
+                 <input type="hidden" name="id" value="<?= $contact->getId() ?>">    
                 <label for="name">Name:</label>
                 <input id="name" type="text" name="name" value="<?= $contact->getName() ?>" required><br>
 
                 <label for="phoneNumber">Phone Number:</label>
-                <input id="phoneNumber" type="text" name="phoneNumber" value="<?= $contact->getPhoneNumber() ?>" required><br>
+                <input id="phoneNumber" type="tel" name="phoneNumber" value="<?= $contact->getPhoneNumber() ?>" required><br>
 
                 <label for="email">Email:</label>
                 <input id="email" type="text" name="email" value="<?= $contact->getEmail() ?>" required><br>

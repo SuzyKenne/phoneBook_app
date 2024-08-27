@@ -11,6 +11,8 @@ require './src/contactManager.php';
 
 $contactManager = new ContactManager($model);
 
+$i = 1;
+
 $contacts = $contactManager->getAllContacts();
 
 
@@ -55,7 +57,7 @@ $contacts = $contactManager->getAllContacts();
                         if($contacts){
                             foreach ($contacts as $contact) {
                                 echo "<tr>";
-                                echo "<td>" . $contact->getId() . "</td>";
+                                echo "<td>" . $i. "</td>";
                                 echo "<td><img src='" . $contact->getImage() . "' alt='Contact Image' width='50' style='margin-right: 10px;'>" . $contact->getName() . "</td>";
                                 echo "<td>" . $contact->getEmail() . "</td>";
                                 echo "<td>" . $contact->getPhoneNumber() . "</td>";  
@@ -73,6 +75,7 @@ $contacts = $contactManager->getAllContacts();
                                         </span>
                                     </td>";
                                 echo "</tr>";
+                                $i++;
                             }
                         } else {
                             echo "<tr><td colspan='6'>No contacts found.</td></tr>";

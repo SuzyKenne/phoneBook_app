@@ -4,6 +4,8 @@ require './src/contactManager.php';
 $model = new Model();
 $contactManager = new ContactManager($model);
 
+
+
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $phoneNumber = $_POST['phoneNumber'];
