@@ -1,98 +1,85 @@
-[
-    {
+{
+    "contacts": [
+      {
         "id": 1,
         "name": "Kenne Suzy",
-        "phoneNumber": "+237 650 398 429",
         "email": "suzyndatewo@gmail.com",
+        "phoneNumber": "+237 650 398 429",
         "category": "Family",
-        "image": "assets\/images\/image1.jpeg"
-    },
-    {
+        "image": "assets/images/image1.jpeg"
+      },
+      {
         "id": 2,
-        "name": "Monie Julius",
-        "phoneNumber": "+237 657 345 123",
-        "email": "moniejulius@gmail.com",
-        "category": "Friend",
-        "image": "assets\/images\/image2.jpeg"
-    },
-    {
+        "name": "Matho Hestie",
+        "email": "hestie.matho@gmail.com",
+        "phoneNumber": "+237 674 567 123",
+        "category": "Friends",
+        "image": "assets/images/image2.jpeg"
+      },
+      {
         "id": 3,
-        "name": "Kenne Suzy",
-        "phoneNumber": "+237 650 398 429",
-        "email": "suzyndatewo@gmail.com",
-        "category": "Family",
-        "image": "assets\/images\/image1.jpeg"
-    },
-    {
+        "name": "Siaha Aubin",
+        "email": "aubin.siaha@gmail.com",
+        "phoneNumber": "+237 690 345 678",
+        "category": "Work",
+        "image": "assets/images/image1.jpeg"
+      },
+      {
         "id": 4,
-        "name": "Yan Ivan",
-        "phoneNumber": "+237 657 345 123",
-        "email": "yanivan@gmail.com",
-        "category": "Friend",
-        "image": "assets\/images\/image2.jpeg"
-    },
-    {
+        "name": "Tsapze Cynthia",
+        "email": "cynthia.tsapze@gmail.com",
+        "phoneNumber": "+237 677 234 789",
+        "category": "Family",
+        "image": "assets/images/image2.jpeg"
+      },
+      {
         "id": 5,
-        "name": "Yan Ivan",
-        "phoneNumber": "+237 657 345 123",
-        "email": "yanivan@gmail.com",
-        "category": "Friend",
-        "image": "assets\/images\/image2.jpeg"
-    },
-    {
+        "name": "Djeunou Marieke",
+        "email": "marieke.djeunou@gmail.com",
+        "phoneNumber": "+237 655 123 456",
+        "category": "Friends",
+        "image": "assets/images/image2.jpeg"
+      },
+      {
         "id": 6,
-        "name": "mari Jane",
-        "phoneNumber": "+234 678 345 123",
-        "email": "marie@gmail.com",
-        "category": "client",
-        "image": "assets\/images\/avatar.jpg"
-    },
-    {
+        "name": "John Doe",
+        "email": "john.doe@gmail.com",
+        "phoneNumber": "+123 456 7890",
+        "category": "Work",
+        "image": "assets/images/image1.jpeg"
+      },
+      {
         "id": 7,
-        "name": "ange wendy",
-        "phoneNumber": "+233 890 123 234",
-        "email": "angewendy@gmail.com",
-        "category": "boss",
-        "image": "assets\/images\/boss_avatar.jpeg"
-    },
-    {
+        "name": "Jane Smith",
+        "email": "jane.smith@gmail.com",
+        "phoneNumber": "+123 456 7891",
+        "category": "Family",
+        "image": "assets/images/image1.jpeg"
+      },
+      {
         "id": 8,
-        "name": "georoni pavel",
-        "phoneNumber": "+237 789 456 234",
-        "email": "georonipavell@gmial.com",
-        "category": "friend",
-        "image": "assets\/images"
-    },
-    {
+        "name": "Michael Johnson",
+        "email": "michael.johnson@gmail.com",
+        "phoneNumber": "+123 456 7892",
+        "category": "Friends",
+        "image": "assets/images/image2.jpeg"
+      },
+      {
         "id": 9,
-        "name": "mari Jane",
-        "phoneNumber": "+233 890 123 234",
-        "email": "georonipavell@gmial.com",
-        "category": "boss",
-        "image": "assets\/images"
-    },
-    {
+        "name": "Emily Davis",
+        "email": "emily.davis@gmail.com",
+        "phoneNumber": "+123 456 7893",
+        "category": "Work",
+        "image": "assets/images/avatar.jpg"
+      },
+      {
         "id": 10,
-        "name": "georoni pavel",
-        "phoneNumber": "+234 678 345 123",
-        "email": "georonipavell@gmial.com",
-        "category": "boss",
-        "image": "assets\/images\/"
-    },
-    {
-        "id": 11,
-        "name": "oeoei",
-        "phoneNumber": "3748747464",
-        "email": "jruuuryryr",
-        "category": "family",
-        "image": "assets\/images\/"
-    },
-    {
-        "id": 12,
-        "name": "georoni pavel",
-        "phoneNumber": "+234 678 345 123",
-        "email": "georonipavell@gmial.com",
-        "category": "family",
-        "image": "assets\/images\/"
-    }
-]
+        "name": "David Brown",
+        "email": "david.brown@gmail.com",
+        "phoneNumber": "+123 456 7894",
+        "category": "Family",
+        "image": "assets/images/image1.jpeg"
+      }
+    ]
+  }
+  
