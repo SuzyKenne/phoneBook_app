@@ -43,10 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $name = $_POST['name'];
     $phoneNumber = $_POST['phoneNumber'];
     $email = $_POST['email'];
-    echo $email;
     $category = $_POST['category'];
      // Initialize $image as an empty string
      $image = '';
+
+     //email validation
+     if(!str_ends_with($email, '@gmail.com')){
+        echo "Email must end with @gmail.com";
+        exit;
+     }
 
      // Check if an image was uploaded and if there were no errors
      if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
@@ -101,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <div class="formContentContainer">
             <h2>Edit Contact</h2>
             
-            <form action="editContact.php?id=<?= $contact->getId() ?>" method="post" enctype="multipart/form-data" class="formInput">
+            <form id="contactForm" action="editContact.php?id=<?= $contact->getId() ?>" method="post" enctype="multipart/form-data" class="formInput">
 
                  <input type="hidden" name="id" value="<?= $contact->getId() ?>">    
                 <label for="name">Name:</label>
@@ -111,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <input id="phoneNumber" type="tel" name="phoneNumber" value="<?= $contact->getPhoneNumber() ?>" required><br>
 
                 <label for="email">Email:</label>
-                <input id="email" type="text" name="email" value="<?= $contact->getEmail() ?>" required><br>
+                <input id="email" type="email" name="email" value="<?= $contact->getEmail() ?>" required><br>
 
                 <label for="category">Category:</label>
                 <select name="category">
@@ -129,5 +134,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </form>
         </div>
     </div>
+
+    <!-- <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event){
+            var emailInput = document.getElementById('email').value;
+            var emailDomain = "@gmail.com";
+            if(!emailInput.endsWitch(emailDomain)){
+                alert("Email must end with " + emailDomain);
+                event.preventDefault();
+            }
+        })
+    </script> -->
 </body>
 </html>

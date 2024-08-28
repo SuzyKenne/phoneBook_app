@@ -15,6 +15,12 @@ if (isset($_POST['submit'])) {
     // Initialize $image as an empty string
     $image = '';
 
+     //email validation
+     if(!str_ends_with($email, '@gmail.com')){
+        echo "Email must end with @gmail.com";
+        exit;
+     }
+
     // Check if an image was uploaded and if there were no errors
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         // Get the file name and temporary path
@@ -63,14 +69,14 @@ if (isset($_POST['submit'])) {
         <div class="formContentContainer">
             <h2>Add Contacts</h2>
             
-                <form action="addContact.php" method="post" enctype="multipart/form-data" class="formInput">
+                <form id="contactForm" action="addContact.php" method="post" enctype="multipart/form-data" class="formInput">
                     <label for="name">Name:</label>
                     <input id="name" type="text" placeholder="Enter your name" name="name"  required><br>
 
                     <label for="phoneNumber">Phone Number:</label>
-                    <input id="phoneNumber" type="text" placeholder="Enter your phoneNumber" name="phoneNumber"  required>
+                    <input id="phoneNumber" type="tel" placeholder="Enter your phoneNumber" name="phoneNumber"  required>
                     <label for="email">Email:</label>
-                    <input id="email" type="text" placeholder="Enter your email" name="email"  required><br>
+                    <input id="email" type="email" placeholder="Enter your email" name="email"  required><br>
 
                     <label for="category">Category:</label>
                     <select name="category" >    
@@ -88,6 +94,17 @@ if (isset($_POST['submit'])) {
             
         </div>
     </div>
-   
+
+    <!-- <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event){
+            var emailInput = document.getElementById('email').value;
+            var emailDomain = "@gmail.com";
+            if(!emailInput.endsWitch(emailDomain)){
+                alert("Email must end with " + emailDomain);
+                event.preventDefault();
+            }
+        });
+    </script>
+    -->
 </body>
 </html>

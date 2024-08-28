@@ -44,7 +44,7 @@ $contacts = $contactManager->getAllContacts();
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th >ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
@@ -58,7 +58,10 @@ $contacts = $contactManager->getAllContacts();
                             foreach ($contacts as $contact) {
                                 echo "<tr>";
                                 echo "<td>" . $i. "</td>";
-                                echo "<td><img src='" . $contact->getImage() . "' alt='Contact Image' width='50' style='margin-right: 10px;'>" . $contact->getName() . "</td>";
+                                echo "<td><a href='viewContact.php?id=". $contact->getId() ."'>"
+                                          . $contact->getName() .
+                                          
+                                        "</a></td>";
                                 echo "<td>" . $contact->getEmail() . "</td>";
                                 echo "<td>" . $contact->getPhoneNumber() . "</td>";  
                                 echo "<td>" . $contact->getCategory() . "</td>";                    

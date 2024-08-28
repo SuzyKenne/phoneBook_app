@@ -22,7 +22,7 @@ class ContactManager {
     public function getAllContacts() {
         $conn = new mysqli($this->servername, $this->username,$this->password, $this->dbname);
 
-        $sql = "SELECT * FROM contacts";
+        $sql = "SELECT * FROM contacts ORDER BY name ASC";
         $result = $conn->query($sql);
 
         if($result->num_rows > 0){
@@ -46,6 +46,43 @@ class ContactManager {
             error_log("Database Query Failed: " . $this->conn->error);
             return null;
         }
+        
+    }
+
+
+    public function getContactById(){
+        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+
+        $sql = "SELECT * FROM contacts WHERE id = ? ";
+        $stmt = $conn->prepare($sql);
+
+        if($stmt === false){
+            error_log("Perare failed: " . $conn->error);
+            return null;
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows === 0){
+
+            
+            $row = $result->fetch_assoc();
+
+            var_dump($row);
+            $contact = new Contact(
+                $row['id'],
+                $row['image'],
+                $row['name'],
+                $row['email'],
+                $row['phoneNumber'],
+                $row['category']
+            );
+
+        } return $contact;
+
+        $stmt->close();
         
     }
 
