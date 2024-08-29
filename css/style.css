@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 30px;
+    margin-left: 50px;
     padding: 0;
 }
 input{
@@ -14,59 +14,7 @@ select{
 
 .container {
     display: flex;
-    width: 100%;
-}
-
-.menu {
-    background-color: #777777;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-.sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar .create-contact button {
-    background-color: #777777;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-
-.sidebar  ul,
-.sidebar .view-manage ul,
-.sidebar .category ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.sidebar  a,
-.sidebar .view-manage a,
-.sidebar .category a {
-    text-decoration: none;
-    padding: 10px 5px;
-    margin: 5% 0;
-    cursor: pointer;
-    color: #333;
-}
-
-.sidebar  li.active {
-    font-weight: bold;
-}
-.sidebar li i {
-    margin-right: 10px;
-    color: #555;
+    width: 95%;
 }
 
 header {
@@ -85,8 +33,8 @@ header {
     border-radius: 10px;
     white-space: nowrap;
     overflow-x: auto;
-    max-width: 1920px;
-    width: 100%;
+    max-width: 1800px;
+    width: 95%;
     margin: auto;
 }
 
@@ -115,6 +63,53 @@ table th:first-child, table td:first-child {
     overflow: hidden;
 
 }
+
+
+td:nth-child(1), 
+td:nth-child(2), 
+th:nth-child(1),
+th:nth-child(2) {
+    padding-left: 3px;
+    padding-right: 3px;
+    width: 0.5%; 
+}
+
+td:nth-child(2),
+th:nth-child(2),
+th:nth-child(3) {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 1.5%; 
+}
+
+td:nth-child(3), 
+td:nth-child(4), 
+th:nth-child(3),
+th:nth-child(4) {
+    padding-left: 3px;
+    padding-right: 3px;
+    width: 2%; 
+}
+
+td:nth-child(4), 
+td:nth-child(5), 
+th:nth-child(4),
+th:nth-child(5) {
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 1.5%; 
+}
+/* Target the fifth (Category) and sixth (Options) columns */
+td:nth-child(5), 
+td:nth-child(6), 
+th:nth-child(5),
+th:nth-child(6) {
+    padding-left: -5px;
+    padding-right: -5px;
+    width: 1%; 
+}
+
+
 
 .formContainer {
     position: relative;
@@ -166,7 +161,7 @@ h2 {
 .options{
     display: inline-block;
     justify-content: space-around;
-    border: 1px solid rgb(235, 235, 240);
+    text-decoration: none;
     border-radius: 3px;
     padding: 0.2rem;
     color: black;
@@ -184,7 +179,16 @@ h2 {
     margin: 0.3rem;
     background-color: #f1470e;
 }
+.option-view{
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
 
+.option-view a:focus{
+    text-decoration: none;
+}
 .options a{
     text-decoration: none;
     color: #333;
@@ -192,7 +196,7 @@ h2 {
 
 .container-view-contact {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -215,5 +219,5 @@ h2 {
 }
 
 .container-view-contact p{
-    font-size: 25px;
+    font-size: 15px;
 }
