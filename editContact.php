@@ -4,6 +4,9 @@ require './src/contactManager.php';
 
 $contactManager = new ContactManager($model);
 
+// Set a default image path
+$defaultImagePath = 'assets/images/default-avatar.png';
+
 // var_dump($updatedContact);
 // var_dump($contactManager); // Check if ContactManager is initialized correctly
 // var_dump($contact); // Check if contact is retrieved correctly
@@ -35,50 +38,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-
-    echo 'this codde runs';
-
-
     $id = $_POST['id']; 
     $name = $_POST['name'];
     $phoneNumber = $_POST['phoneNumber'];
     $email = $_POST['email'];
     $category = $_POST['category'];
-     // Initialize $image as an empty string
-     $image = '';
+    
+    $currentContact = $contactManager->getContactById($id);
+    $image = $currentContact->getImage();
 
-     //email validation
-     if(!str_ends_with($email, '@gmail.com')){
-        echo "Email must end with @gmail.com";
-        exit;
-     }
+    // Check if a new image was uploaded
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $file_name = basename($_FILES['image']['name']);
+        $tempname = $_FILES['image']['tmp_name'];
+        $folder = 'assets/images/' . $file_name;
 
-     // Check if an image was uploaded and if there were no errors
-     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-         // Get the file name and temporary path
-         $file_name = basename($_FILES['image']['name']); // Sanitize file name
-         $tempname = $_FILES['image']['tmp_name'];
- 
-         // Define the target directory where the file should be moved
-         $folder = 'assets/images/' . $file_name;
- 
-         
- 
-         // Attempt to move the uploaded file to the target directory
-         if (move_uploaded_file($tempname, $folder)) {
-             $image = $folder; // Assign the file path to $image
-             echo "Image uploaded successfully: $image";
-         } else {
-             echo "Failed to move uploaded file.";
-         }
-     } 
-    echo 'contace object instantiated';
+        if (move_uploaded_file($tempname, $folder)) {
+            $image = $folder;
+            echo "Image uploaded successfully: $image";
+        } else {
+            echo "Failed to move uploaded file.";
+        }
+    }
 
     $updatedContact = new Contact($id, $image, $name, $email, $phoneNumber, $category);
-    
 
     if ($contactManager->editContact($updatedContact)) {
-    
         header("Location: index.php");
         exit();
     } else {
@@ -86,10 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     }
 }
 
+?>
+
+
 
     
 
-?>
+
 
 
 
@@ -99,6 +87,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styleAddContact.css">
+    <style>
+        .image-preview-container {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #image {
+            margin-bottom: 10px;
+        }
+    </style>
     <title>Edit Contacts</title>
 </head>
 <body>
@@ -137,24 +146,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         </div>
                         <div class="form-group">
                             <label for="image">Image:</label>
-                            <input id="image" type="file" name="image" accept="image/*"><br>
-                            <img src="<?= $contact->getImage() ?>" alt="Current Image" width="100"><br>
+                            <input id="image" type="file" name="image" value="<?= $contact->getImage() ?>" accept="image/*">
+                            <div class="image-preview-container" >
+                                <img id="image-preview" src="<?= $contact->getImage() ?: $defaultImagePath?>" alt="">
+                            </div>
                         </div>                    
-                    <button type="submit" name="submit" class="submitButton">Save Contact</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div> 
         </main>
     </div>
 
-    <!-- <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event){
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
             var emailInput = document.getElementById('email').value;
-            var emailDomain = "@gmail.com";
-            if(!emailInput.endsWitch(emailDomain)){
-                alert("Email must end with " + emailDomain);
+            
+            // Check if email contains both "@" and "."
+            if (!emailInput.includes('@') || !emailInput.includes('.')) {
+                alert("Please enter a valid email address containing both '@' and '.'");
                 event.preventDefault();
             }
-        })
-    </script> -->
+        });
+
+        // Image preview functionality
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('image-preview');
+            const previewContainer = document.querySelector('.image-preview-container');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'flex';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // If no file is selected, keep the current image
+                preview.src = preview.src;
+                previewContainer.style.display = 'flex';
+            }
+        });
+    </script> 
 </body>
 </html>

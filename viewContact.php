@@ -1,9 +1,16 @@
 <?php
 require './src/contactManager.php';
+
+// Set a default image path
+$defaultImagePath = 'assets/images/default-avatar.png';
 $contactManager = new ContactManager($model);
+
+
+
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $contact = $contactManager->getContactById($id);
+    $image = $defaultImagePath;
     if($contact === null) {
         echo "Contact not found!";
         exit();
@@ -32,7 +39,7 @@ if(isset($_GET['id'])){
                 <h2>Contact Details</h2>
                 <?php if ($contact): ?>
                     <div class="contact-image">
-                        <img src="<?= $contact->getImage(); ?>" alt="Contact Image" />
+                        <img src="<?= $contact->getImage() ?: $defaultImagePath?>" alt="Contact Image" />
                     </div>
                     <div class="contact-info">
                         <p><span>Name:</span> <?= htmlspecialchars($contact->getName()); ?></p>

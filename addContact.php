@@ -52,6 +52,27 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styleAddContact.css">
+    <style>
+        .image-preview-container {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #image {
+            margin-bottom: 10px;
+        }
+    </style>
     <title>Add Contact</title>
 </head>
 <body>
@@ -88,11 +109,12 @@ if (isset($_POST['submit'])) {
                     <div class="form-group">
                         <label for="image">Image:</label>
                         <input id="image" type="file" name="image" accept="image/*">
-                        <div id="image-preview" style="display: none;">
-                           <img src=" . $image . " alt="">
-                        </div>  
+                        <div class="image-preview-container" style="display: none;">
+                            <img id="image-preview" src="#" alt="Image preview">
+                        </div>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">Add Contact</button>
+
+                 <button type="submit" name="submit" class="btn btn-primary">Add Contact</button>
                 </form>
             </div>
         </main>
@@ -106,6 +128,27 @@ if (isset($_POST['submit'])) {
                 event.preventDefault();
             }
         });
+
+    
+        // Image preview functionality
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('image-preview');
+            const previewContainer = document.querySelector('.image-preview-container');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'flex';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                previewContainer.style.display = 'none';
+            }
+        });
+        
     </script>
 </body>
 </html>
