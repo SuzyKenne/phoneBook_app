@@ -98,41 +98,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleAddContact.css">
     <title>Edit Contacts</title>
 </head>
 <body>
-    <div class="formContainer">
-        <div class="formContentContainer">
-            <h2>Edit Contact</h2>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>PhoneBook App</h1>
+            <a href="index.php" class="btn btn-secondary">Back to Contacts</a>
+        </header>
             
-            <form id="contactForm" action="editContact.php?id=<?= $contact->getId() ?>" method="post" enctype="multipart/form-data" class="formInput">
-
-                 <input type="hidden" name="id" value="<?= $contact->getId() ?>">    
-                <label for="name">Name:</label>
-                <input id="name" type="text" name="name" value="<?= $contact->getName() ?>" required><br>
-
-                <label for="phoneNumber">Phone Number:</label>
-                <input id="phoneNumber" type="tel" name="phoneNumber" value="<?= $contact->getPhoneNumber() ?>" required><br>
-
-                <label for="email">Email:</label>
-                <input id="email" type="email" name="email" value="<?= $contact->getEmail() ?>" required><br>
-
-                <label for="category">Category:</label>
-                <select name="category">
-                    <option value="family" <?= $contact->getCategory() == 'family' ? 'selected' : '' ?>>Family</option>
-                    <option value="friend" <?= $contact->getCategory() == 'friend' ? 'selected' : '' ?>>Friend</option>
-                    <option value="client" <?= $contact->getCategory() == 'client' ? 'selected' : '' ?>>Client</option>
-                    <option value="boss" <?= $contact->getCategory() == 'boss' ? 'selected' : '' ?>>Boss</option>
-                </select><br>
-
-                <label for="image">Image:</label>
-                <input id="image" type="file" name="image" accept="image/*"><br>
-                <img src="<?= $contact->getImage() ?>" alt="Current Image" width="100"><br>
-
-                <button type="submit" name="submit" class="submitButton">Save Contact</button>
-            </form>
-        </div>
+        <main class="main-content">   
+            <div class="form-container">
+                <h2>Edit Contact</h2>
+                <form id="contactForm" action="editContact.php?id=<?= $contact->getId() ?>" method="post" enctype="multipart/form-data" class="formInput">
+                        <div class="form-group">
+                            <input type="hidden" name="id" value="<?= $contact->getId() ?>">    
+                            <label for="name">Name:</label>
+                            <input id="name" type="text" name="name" value="<?= $contact->getName() ?>" required><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input id="phoneNumber" type="tel" name="phoneNumber" value="<?= $contact->getPhoneNumber() ?>" required><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input id="email" type="email" name="email" value="<?= $contact->getEmail() ?>" required><br>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select name="category">
+                                <option value="family" <?= $contact->getCategory() == 'family' ? 'selected' : '' ?>>Family</option>
+                                <option value="friend" <?= $contact->getCategory() == 'friend' ? 'selected' : '' ?>>Friend</option>
+                                <option value="client" <?= $contact->getCategory() == 'client' ? 'selected' : '' ?>>Client</option>
+                                <option value="boss" <?= $contact->getCategory() == 'boss' ? 'selected' : '' ?>>Boss</option>
+                            </select><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image:</label>
+                            <input id="image" type="file" name="image" accept="image/*"><br>
+                            <img src="<?= $contact->getImage() ?>" alt="Current Image" width="100"><br>
+                        </div>                    
+                    <button type="submit" name="submit" class="submitButton">Save Contact</button>
+                </form>
+            </div> 
+        </main>
     </div>
 
     <!-- <script>
