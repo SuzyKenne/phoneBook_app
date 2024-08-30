@@ -17,6 +17,8 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
+    
+
     // Check if an image was uploaded and if there were no errors
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         // Get the file name and temporary path
@@ -91,7 +93,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber">Phone Number:</label>
-                        <input id="phoneNumber" type="tel" placeholder="Enter phone number" name="phoneNumber" required>
+                        <input id="phoneNumber" pattern="[0-9()+\-\s]+" type="tel" placeholder="Enter phone number" name="phoneNumber" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
@@ -129,6 +131,22 @@ if (isset($_POST['submit'])) {
             }
         });
 
+        // Allow only digits and specific special characters in phone number field
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9()+\-\s]/g, '');
+        });
+
+        
+        var phoneNumber = document.getElementById('phoneNumber').value;
+            if (phoneNumber.trim().length === 0) {
+                alert("Phone number is required.");
+                event.preventDefault();
+            } else if (!/^[0-9()+\-\s]+$/.test(phoneNumber)) {
+                alert("Phone number can only contain digits, spaces, and the characters: +()-");
+                event.preventDefault();
+            }
+        ;
+
     
         // Image preview functionality
         document.getElementById('image').addEventListener('change', function(event) {
@@ -144,8 +162,9 @@ if (isset($_POST['submit'])) {
                 }
                 reader.readAsDataURL(file);
             } else {
-                preview.src = '#';
-                previewContainer.style.display = 'none';
+                // If no file is selected, keep the current image
+                preview.src = preview.src;
+                previewContainer.style.display = 'flex';
             }
         });
         
